@@ -1,0 +1,96 @@
+Traceroute
+
+1  mygateway1.ar7 (10.1.1.1)  167.318 ms  167.388 ms  167.544 ms
+ 2  syd-pow-cla-bras-13-lo-20.tpgi.com.au (10.20.21.180)  178.235 ms  178.344 ms  178.679 ms
+ 3  syd-pow-cla-csw2-tengi-3-2.tpgi.com.au (202.7.173.13)  268.076 ms  268.216 ms  268.358 ms
+ 4  syd-pow-cla-crt1-ge-4-0.tpgi.com.au (202.7.162.13)  280.518 ms  286.301 ms  286.466 ms
+ 5  66.162.129.149 (66.162.129.149)  1455.602 ms  1455.599 ms  1455.653 ms
+ 6  sjc1-pr1-xe-1-2-0-0.us.twtelecom.net (66.192.242.190)  1457.984 ms  3615.785 ms  3982.929 ms
+ 7  64.132.69.106 (64.132.69.106)  3982.961 ms  3982.907 ms  3982.956 ms
+ 8  202.97.50.81 (202.97.50.81)  3982.990 ms  3985.118 ms  4054.416 ms
+ 9  202.97.50.113 (202.97.50.113)  4239.043 ms  4239.026 ms  4239.006 ms
+10  202.97.35.97 (202.97.35.97)  4239.085 ms  7058.464 ms  7058.524 ms
+11  202.97.33.21 (202.97.33.21)  7058.339 ms  7058.390 ms  7061.054 ms
+12  202.97.39.134 (202.97.39.134)  3282.144 ms  3282.180 ms  3282.221 ms
+13  118.84.3.2 (118.84.3.2)  3284.467 ms  3310.297 ms  3312.610 ms
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+19  * * *
+20  * * *
+21  * * *
+22  * * *
+23  * * *
+24  * * *
+25  * * *
+26  * * *
+27  * * *
+28  * * *
+29  * * *
+30  * * *
+
+Test run on 10/04/2013 @ 03:19 PM
+
+Mirror: TPG
+Data: 442 KB
+Test Time: 11.15 secs
+
+Your line speed is 325 kbps (0.32 Mbps).
+Your download speed is 41 KB/s (0.04 MB/s).
+
+
+PING google.com (36.4.104.0) 56(84) bytes of data.
+^C
+
+--- google.com ping statistics ---
+1386 packets transmitted, 0 received, 100% packet loss, time 1394453ms
+
+
+--- tpg.com.au ping statistics ---
+56 packets transmitted, 55 received, 1% packet loss, time 60614ms
+rtt min/avg/max/mdev = 21.901/408.131/2898.662/688.752 ms, pipe 3
+
+
+
+traceroute to google.com (36.4.104.0), 30 hops max, 60 byte packets
+ 1  10.1.1.1 (10.1.1.1)  1317.983 ms *  1330.080 ms
+ 2  10.20.21.180 (10.20.21.180)  1339.226 ms  1342.420 ms  1353.635 ms
+ 3  202.7.173.13 (202.7.173.13)  1427.999 ms  1441.683 ms  1445.322 ms
+ 4  202.7.162.13 (202.7.162.13)  1466.087 ms  1469.852 ms  1471.902 ms
+ 5  * * *
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  * * *
+10  * * *
+11  * * *
+12  * * *
+13  * * *
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+19  * * *
+20  * * *
+21  * * *
+22  * * *
+23  * * *
+24  * * *
+25  * * *
+26  * * *
+27  * * *
+28  * * *
+29  * * *
+30  * * *
+
+traceroute to tpg.com.au (203.26.27.38), 30 hops max, 60 byte packets
+ 1  mygateway1.ar7 (10.1.1.1)  786.800 ms  795.752 ms  796.941 ms
+ 2  syd (10.20.21.180)  839.927 ms  841.545 ms  841.710 ms
+ 3  syd-pow-cla-csw1-tengi-3-2.tpgi.com.au (202.7.173.9)  841.876 ms  842.044 ms  846.045 ms
+ 4  tpg.com.au (203.26.27.38)  846.204 ms  846.385 ms  860.255 ms
+trothwell@trothwell-MacBookAir:/var/www$ 
+
+
