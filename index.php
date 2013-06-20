@@ -25,14 +25,14 @@
 					echo "There are ", $results->hits, ' on ' . $_POST['term'] . '<br />';
                 			while ($r = $results->nextResult()) {
                         			$file = file_get_contents($r->swishdocpath);
-						$regex = '/([A-Za-z0-9.,-]+\s+){0,5}' . $_POST['term'] . '(\s+[A-Za-z0-9.,-]+){0,5}/i';
+						$regex = '/([A-Za-z0-9.,-]+\s+){0,10}' . $_POST['term'] . '(\s+[A-Za-z0-9.,-]+){0,10}/i';
 						preg_match($regex, $file, $matches);
 						printf("in file %s, relevance %d <br />",
                                 			$r->swishdocpath,
                                 			$r->swishrank
                         			);
 						if (!empty($matches)) {
-							echo '<quote>' . $matches[0] . '</quote>';
+							echo '<div class="span4"><small>' . $matches[0] . '</small></div>';
 						}
                 			}
         			}
