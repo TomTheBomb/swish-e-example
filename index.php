@@ -19,29 +19,40 @@
 
 				<?php 
         			if (!empty($_POST)) {
-                			$h = new Swish("config/index.swish-e");
-                			$results = $h->query($_POST['term']);
-                			//var_dump($results->getParsedWords("config/index.swish-e"));
-					echo "There are ", $results->hits, ' on ' . $_POST['term'] . '<br />';
-                			while ($r = $results->nextResult()) {
-                        			$file = file_get_contents($r->swishdocpath);
-						$regex = '/([A-Za-z0-9.,-]+\s+){0,10}' . $_POST['term'] . '(\s+[A-Za-z0-9.,-]+){0,10}/i';
-						preg_match($regex, $file, $matches);
-						printf("in file %s, relevance %d <br />",
-                                			$r->swishdocpath,
-                                			$r->swishrank
-                        			);
-						if (!empty($matches)) {
-							echo '<div class="span4"><small>' . $matches[0] . '</small></div>';
-						}
-                			}
-        			}
+                			require_once('result.php');
+							try {
+								$h = new Swish("config/index.swish-e");
+								$results = $h->query($_POST['term']);
+								echo "There are ", $results->hits, ' on ' . $_POST['term'] . '<br />';
+								$fileLocs = array();
+								while ($r = $results->nextResult()) {
+									$fileLocs[] = $r->swishdocpath;
+								}
+								$search = new ResultText($fileLocs, $_POST['term'], 10);
+								$results = $search->getResults();
+								foreach ($fileLocs as $key => $loc) {
+									echo '<div>' . $loc;
+									if (!empty($results[$loc])) {
+										foreach ($results[$loc] as $word) {
+											foreach ($word as $result) {
+												echo '<blockquote><small>' . $result . '</small></blockquote>';
+											}
+										}
+									}
+									echo '</div>';
+								}
+							} catch (Exception $e) {
+								echo '<div class="span5 alert alert-error">' . $e->getMessage() . '</div>';
+							}
+					}
 				?>
-    						<legend>Search file base</legend>
+				<div>
+    					<legend>Search file base</legend>
 						<input name="term" type="text" class="input-large">
 						<span class="help-block">OR, AND, * can be used in combination to find terms</span>
     						<button type="submit" class="btn">Search</button>
-  					</fieldset>
+  				</div>
+					</fieldset>
 				</form>
 			</div>
   		</div>

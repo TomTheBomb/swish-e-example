@@ -36,7 +36,7 @@ print "</pre>";
                         </div>
                         <div class="span10">
                                 <h1>Swish-E <strong>/</strong> <small><a href="index.php">Search file base</a></small></h1>
-				<form action="upload.php" method="post" enctype="multipart/form-data">
+								<form action="upload.php" method="post" enctype="multipart/form-data">
                                         <fieldset>
                                                 <legend>Upload a file</legend>
                                                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
