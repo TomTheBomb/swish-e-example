@@ -1,6 +1,6 @@
 <?php
 /**
- * Class that offers
+ * 
  *
  *
  */
@@ -20,13 +20,21 @@ class ResultText {
 	 * Implement securty to prevent people uploading docs filled 
 	 * with HTML / JS that are outputted not escaped
 	 */
-	public function __construct($files = array(), $words, $wordTrim = 10) {
-		
+	public function __construct($files = array(), $words, $wordTrim = 10, $commonWords = false) {
 		if (empty($files)) {
 			return;
 		}
 
-		$words = $this->breakWords($words);
+		$words = $this->breakWords($this->removeNotSnippets($words));
+		foreach ($words as $key => $word) {
+			if ($commonWords) {
+				//remove common words
+				
+			}
+
+			//replace whitespace wit
+			$words[$key] = preg_replace("/\s+/", '\s+', $word);
+		}
 
 		foreach ($files as $file) {
 			$content = $this->getContent($file);
@@ -58,8 +66,10 @@ class ResultText {
 				break;
 			case 'doc':
 				return shell_exec("catdoc \"{$fileLoc}\"");
+				break;
 			case 'docx':
-				return null;
+				return shell_exec("sh ./catdocx.sh \"{$fileLoc}\"");
+				break;
 		}
 	}
 
@@ -70,15 +80,15 @@ class ResultText {
     		"/(\S+\s+){0,{$wordTrim}} # Match five (or less) 'words'
     		\S*             # Match (if present) punctuation before the search term
     		\b              # Assert position at the start of a word
-    		{$words}           # Match the search term
+    		({$words})           # Match the search term
     		\b              # Assert position at the end of a word
     		\S*             # Match (if present) punctuation after the search term
     		(\s+\S+){0,{$wordTrim}}   # Match five (or less) 'words'
     		/ix";
-		
-		$highlightPattern = "/\b{$words}\b/ix";
-	
+			
+		$highlightPattern = "/\b({$words})\b/ix";
 		preg_match_all($pattern, $content, $result, PREG_PATTERN_ORDER);
+		
 		if (!empty($result[0])) {
 			//Wrap found results
 			foreach ($result[0] as $key => $res) {
@@ -100,9 +110,11 @@ class ResultText {
 		}
 		
 		//remove AND / OR from words
-		$words = trim(str_ireplace(array('and', 'or'), array(null, null), $words));
+		$words = trim(str_ireplace(array('and', 'or', 'not'), array('', '', ''), $words));
 		$clean = preg_split('/\s+/', $words);
-		$brokenWords = array_merge_recursive($clean, $brokenWords);
+		if (!empty($words)) {
+			$brokenWords = array_merge_recursive($clean, $brokenWords);
+		}
 		return $brokenWords;
 	}
 
@@ -112,6 +124,7 @@ class ResultText {
 		//NOT "word"
 		//word AND NOT "word"
 		//word AND NOT word
+		return preg_replace("/(?<=\bNOT\s)(\w+|\"(.*?)\")/i", null, $words);
 	}
 
 	public function getResults() {
@@ -122,5 +135,3 @@ class ResultText {
 		$this->commonWords = $words;
 	}
 }
-
-//$blah = new ResultText(array('/var/www/swish/files/bob.txt', '/var/www/swish/files/Inside_Retail_Ad.pdf', '/home/trothwell/Documents/doc1.doc'), 'contact', 4);
