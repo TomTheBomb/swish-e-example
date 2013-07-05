@@ -35,14 +35,14 @@ class ResultText {
 			//replace whitespace wit
 			$words[$key] = preg_replace("/\s+/", '\s+', $word);
 		}
-
 		foreach ($files as $file) {
+			$short = array_pop(explode('/', $file));
 			$content = $this->getContent($file);
-			$this->results[$file] = array();
+			$this->results[$short] = array();
 			foreach ($words as $word) {
 				$result = $this->searchContent($content, $word, $wordTrim);
 				if (!empty($result)) {
-					$this->results[$file][$word] = $result;
+					$this->results[$short][$word] = $result;
 				}
 			}
 		}
@@ -70,12 +70,15 @@ class ResultText {
 			case 'docx':
 				return shell_exec("sh ./catdocx.sh \"{$fileLoc}\"");
 				break;
+			case 'rtf':
+				return shell_exec("unrtf --text \"{$fileLoc}\"");
+				break;
 		}
 	}
 
 	private function searchContent($content, $words, $wordTrim) {
 		//break any keywords out
-		$words = str_replace(array('*', '"'), array('.*?', ''), $words);
+		$words = str_replace(array('*', '"', '(', ')'), array('.*?', '', '', ''), $words);
 		$pattern = 
     		"/(\S+\s+){0,{$wordTrim}} # Match five (or less) 'words'
     		\S*             # Match (if present) punctuation before the search term
@@ -110,7 +113,8 @@ class ResultText {
 		}
 		
 		//remove AND / OR from words
-		$words = trim(str_ireplace(array('and', 'or', 'not'), array('', '', ''), $words));
+		$words = str_replace(array(')', '('), array('', ''), $words);
+		$words = trim(preg_replace(array('/\band\b/i', '/\bor\b/i', '/\bnot\b/i'), array('', '', ''), $words));
 		$clean = preg_split('/\s+/', $words);
 		if (!empty($words)) {
 			$brokenWords = array_merge_recursive($clean, $brokenWords);

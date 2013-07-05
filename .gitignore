@@ -1,0 +1,8 @@
+*.swp
+*.swo
+*.swr
+*.swn
+*.swm
+files/*
+*~
+.DS_Store

@@ -1,0 +1,7 @@
+.loc-holder {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.loc-holder .location {
+	font-weight: bold;
+}
