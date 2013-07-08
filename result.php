@@ -73,6 +73,9 @@ class ResultText {
 			case 'rtf':
 				return shell_exec("unrtf --text \"{$fileLoc}\"");
 				break;
+			case 'html':
+				return html_entity_decode(strip_tags(file_get_contents($fileLoc)), ENT_QUOTES, 'UTF-8');
+				break;
 		}
 	}
 

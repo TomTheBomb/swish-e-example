@@ -16,7 +16,6 @@ var TxtFind = {
 			//Make a request to grab the contents of the group
 			var json = JSON.stringify(group);
 			$.get('ajax.php?files=' + json + '&term=' + $('#term').text(), function(data) {
-				console.log(data);
 				for (var key in data) {
 					var obj = data[key];
 					for (var prop in obj) {
@@ -26,7 +25,6 @@ var TxtFind = {
 							//Find the key and add the result to the page
 							results.each(function() {
 								if ($(this).text() == key) {
-									console.log(obj[prop]);
 									$(this).parent().append("<quote><small>" + obj[prop] + "</small></quote>").hide().fadeIn(300);
 								}
 							});

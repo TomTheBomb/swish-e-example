@@ -35,13 +35,13 @@ print "</pre>";
 
                         </div>
                         <div class="span10">
-                                <h1>Swish-E <strong>/</strong> <small><a href="index.php">Search file base</a></small></h1>
+                                <h1><img src="http://www.expr3ss.com/expr3ss_images/expr3ssLogo.png" width="115px" height="115px"/> <strong>/</strong> <small><a href="index.php">Search file base</a></small></h1>
 								<form action="upload.php" method="post" enctype="multipart/form-data">
                                         <fieldset>
                                                 <legend>Upload a file</legend>
                                                 <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
                                                 <input type="file" name="file" id="file">
-                                                <span class="help-block">Supported formats: pdf, doc, docx, txt</span>
+                                                <span class="help-block">Supported formats: pdf, doc, docx, txt, rtf</span>
                                                 <button type="submit" class="btn">Submit</button>
                                         </fieldset>
                                 </form>
