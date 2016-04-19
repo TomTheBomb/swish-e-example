@@ -3,6 +3,6 @@
 *.swr
 *.swn
 *.swm
-files/*
+config/*
 *~
 .DS_Store

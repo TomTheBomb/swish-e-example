@@ -13,7 +13,7 @@
     
 			</div>
 			<div class="span10">
-				<h1><img src="http://www.expr3ss.com/expr3ss_images/expr3ssLogo.png" width="115px" height="115px" /> <strong>/</strong> <small><a href="upload.php">Upload a File</a></small></h1>
+				<h1>Swish-E <strong>/</strong> <small><a href="upload.php">Upload a File</a></small></h1>
 				<form name="search" method="post" action="">
 				<fieldset>
 					<?php 

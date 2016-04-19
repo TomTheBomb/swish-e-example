@@ -25,6 +25,7 @@ var TxtFind = {
 							//Find the key and add the result to the page
 							results.each(function() {
 								if ($(this).text() == key) {
+									console.log(obj[prop]);
 									$(this).parent().append("<quote><small>" + obj[prop] + "</small></quote>").hide().fadeIn(300);
 								}
 							});
